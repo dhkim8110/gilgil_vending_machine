@@ -7,6 +7,9 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    ui->pb_Coffee->setEnabled(false);
+    ui->pb_Tea->setEnabled(false);
+    ui->pb_Gongcha->setEnabled(false);
 }
 
 Widget::~Widget()
@@ -17,18 +20,30 @@ Widget::~Widget()
 void Widget::change_Money(int n) {
     money += n;
 
-    if(money <= 0){
+    if(money >= 100){
+        ui->pb_Coffee->setEnabled(true);
+    }else{
+        ui->pb_Coffee->setEnabled(false);
+    }
+
+    if(money >= 150){
+        ui->pb_Tea->setEnabled(true);
+    }else{
+        ui->pb_Tea->setEnabled(false);
+    }
+    if(money >= 200){
+            ui->pb_Gongcha->setEnabled(true);
+    }else{
+        ui->pb_Gongcha->setEnabled(false);
+    }
+
+
+    if(money <= 0) {
         money = 0;
         ui->pb_Coffee->setEnabled(false);
         ui->pb_Tea->setEnabled(false);
         ui->pb_Gongcha->setEnabled(false);
-    }else if(money >= 100){
-        ui->pb_Coffee->setEnabled(true);
-    }else if(money >= 150){
-        ui->pb_Tea->setEnabled(true);
-    }else if(money >= 200){
-            ui->pb_Gongcha->setEnabled(true);
-        }
+    }
 
     ui->lcd->display(QString::number(money));
 
@@ -78,24 +93,38 @@ void Widget::on_pb_Return_clicked()
     dong = money - (500*d500);
 
     //100won
-    dong = dong / 100;
-    d100 = dong;
+    d100 = dong / 100;
     dong = dong - (d100*100);
 
     //50won
-    dong = dong / 100;
-    d100 = dong;
-    dong = dong - (d100*100);
+    d50 = dong / 50;
+    dong = dong - (d50*50);
 
     //10won
-    dong = dong / 50;
-    d50 = dong;
-    dong = dong - (d50*50);
+    d10 = dong / 10;
+    dong = dong - (d10*10);
 
 
     QMessageBox msg;
-    msg.information(nullptr, "Return", "test");
+    msg.information(nullptr, "Return",
+     "500 won: " +QString::number(d500)
+    +"\n 100 won:" +QString::number(d100)
+    +"\n 50  won:" +QString::number(d50)
+    +"\n 10  won:" +QString::number(d10), "");
 
+    money = 0;
+    ui->lcd->display(QString::number(money));
+    ui->pb_Coffee->setEnabled(false);
+    ui->pb_Tea->setEnabled(false);
+    ui->pb_Gongcha->setEnabled(false);
+
+/*
+    msg.setText("500won: " +QString::number(d500)
+                +"\n 100won:" +QString::number(d100)
+                +"\n 50won:" +QString::number(d50)
+                +"\n 10won:" +QString::number(d10));
+    int ret = msg.exec();
+*/
 }
 
 
