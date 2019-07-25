@@ -118,14 +118,6 @@ void Widget::on_pb_Return_clicked()
     ui->pb_Tea->setEnabled(false);
     ui->pb_Gongcha->setEnabled(false);
 
-/*
-    msg.setText("500won: " +QString::number(d500)
-                +"\n 100won:" +QString::number(d100)
-                +"\n 50won:" +QString::number(d50)
-                +"\n 10won:" +QString::number(d10));
-    int ret = msg.exec();
-*/
-}
 
 
 
