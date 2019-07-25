@@ -117,7 +117,6 @@ void Widget::on_pb_Return_clicked()
     ui->pb_Coffee->setEnabled(false);
     ui->pb_Tea->setEnabled(false);
     ui->pb_Gongcha->setEnabled(false);
-
-
+}
 
 
